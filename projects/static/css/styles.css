@@ -1,0 +1,149 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .hero-image {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/static/images/unsplash2.jpg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    height: 650px;
+  }
+  
+  .hero-text {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+  }
+  
+  .hero-text button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 10px 25px;
+    color: black;
+    background-color: #ddd;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .hero-text button:hover {
+    background-color: #555;
+    color: white;
+  }
+
+.hero-profile-pic{
+    padding-right: 300px;
+}
+
+.hero-inner{
+    padding-left: 20px;
+}
+
+.navbar{
+    height: 50px;
+    /* margin-top: 50px; */
+    
+}
+
+.bg-custom-2 {
+    background-image: linear-gradient(15deg, #3f1485 0%, #9f80d0 100%);
+}
+
+.navbar .navbar-nav {
+    position: absolute;
+    left: 50%;
+    transform: translatex(-50%);
+}
+
+.navbar .navbar-collapse {
+    text-align: center;
+}
+
+
+.bg-hero{
+    background-image: url('/static/nick.jpg')
+}
+
+.data-audiolization-frame{
+  margin-left: 50%;
+}
+
+/* Jobs section */
+.fa-map-marker-alt{
+  color: #4c6ef5;
+  font-size: 120px;
+}
+
+.job_image{
+  height: 100px;
+  width: 100px;
+}
+
+.curve{
+  border-left: 6px dotted #4c6ef5;
+  height: 200px;
+  position:relative;
+  left: 16.5%;
+  margin-bottom: 30px;
+  /* width:0.01px;
+  margin-left: 40px;
+  height:250px;
+  border-right: 1px;
+  border:5px #4c6ef5 dotted; */
+  /* border-radius:100%; */
+}
+
+.mychart{
+  width: 400px;
+  height: 400px;
+}
+/* #wrapper{
+  overflow:hidden;
+  width:10px;
+  height:200px;
+} */
+
+
+
+/* .holder {
+  position: relative;
+  width: 200px;
+  height: 50px;
+}
+.clip { */
+  /* Clip edges, as some of the lines don't terminate nicely. 
+  overflow: hidden;
+}
+
+.ellipse {
+  position: absolute;
+  background: radial-gradient(ellipse, transparent, transparent 7px, #4c6ef5 7px, #4c6ef5 10px, transparent 11px);
+  background-size: 36px 40px;
+  
+  width: 200px;
+  height: 20px;
+}
+
+.ellipse2 {
+  top: 20px;
+  left: 18px;
+  background-position: 0px -20px;
+}
+
+/* .navbar .navbar-nav .nav-link .nav-item> a:hover {
+    background: #007bff;
+    color: #fff;
+    border-radius: 30px;
+    display: inline-block;
+    padding: 5px 20px; 
+}
+ */
+

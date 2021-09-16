@@ -1,0 +1,192 @@
+{% extends 'projects/base.html' %}
+{% block 'body'%}
+{% load static %}
+
+    <main role="main">
+
+      <section class="jumbotron text-center hero-image"> 
+          <div class="hero-text">
+            <div class="row">
+              {% for info in general_info.all %}
+              <div class="hero-profile-pic col-lg">
+                <img src="{{ info.image.url }}" height="450px" width="350px">
+              </div>
+              <div class="hero-inner col-lg">
+                
+                  {{ info.first_name }}
+                  {{ info.last_name }}
+                  {{ info.birth_date }}
+                  {{ info.summary }}
+                  {{ info.location }}
+                {% endfor %}
+
+              </div>
+              </div>
+          </div>
+      </section>
+
+      <div class="album py-5 bg-light">
+        <div class="container">
+          <h2>Projects</h2>
+          <div class="row">
+            {% for project in projects.all %}
+            <div class="col-md-4">
+              <a href="{% url 'detail' project.id %}">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" src="{{ project.image.url }}">
+                <div class="card-body">
+                  <p class="card-text"> {{ project.heading }} - {{ project.subheading }} </p>
+                  <!-- <p class="card-header"></p> -->
+                </div>
+              </div>
+              </a>
+            </div>
+
+            {% endfor %}
+          </div>
+
+          <div class="album py-5 bg-light">
+            <div class="container">
+              <h2>Jobs</h2>
+              {% for job in jobs.all %}
+              <div class="row">
+                <div class="col-md-3">
+                      <i class="fas fa-map-marker-alt"></i>
+                      <div class="curve"></div>
+                </div>
+
+                <div class="col-md-2">
+                  <p class="card-text"> <img class="job_image" src="{{ job.image.url }}"> </p>
+                </div>
+                
+                <div class="col-md-3">
+                  <p class="card-text"> {{ job.company_name }} - {{ job.designation }} </p>
+                  <p class="card-text"> {{ job.start_date }} - {{ job.end_date }} </p>
+                  <p class="card-text"> {{ job.summary }} </p>
+                </div>
+              </div>
+              {% endfor %}
+
+        </div>
+      </div>
+
+      <!-- Chart -->   
+        <script type="text/JavaScript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+        
+        <div class="mychart">
+        <script>
+          var endpoint = '/api/chart/data'
+          var defaultData = []
+          var labels = []
+          $.ajax({
+            method: "GET",
+            url: endpoint,
+            success: function(data){
+              labels = data.labels
+              defaultData = data.default
+              setChart()
+            },
+            error: function(error_data){
+              console.log(error)
+              console.log(error_data)
+            },
+          })
+
+          function setChart(){
+            var ctx = document.getElementById('myChart');
+            var ctx2 = document.getElementById('myChart2');
+
+            var myChart2 = new Chart(ctx2, {
+              type: 'bar',
+              data: {
+                  labels: labels,
+                  datasets: [{
+                      label: '# of Votes',
+                      data: defaultData,
+                      backgroundColor: [
+                          'rgba(255, 99, 132, 0.2)',
+                          'rgba(54, 162, 235, 0.2)',
+                          'rgba(255, 206, 86, 0.2)',
+                          'rgba(75, 192, 192, 0.2)',
+                          'rgba(153, 102, 255, 0.2)',
+                          'rgba(255, 159, 64, 0.2)'
+                      ],
+                      borderColor: [
+                          'rgba(255, 99, 132, 1)',
+                          'rgba(54, 162, 235, 1)',
+                          'rgba(255, 206, 86, 1)',
+                          'rgba(75, 192, 192, 1)',
+                          'rgba(153, 102, 255, 1)',
+                          'rgba(255, 159, 64, 1)'
+                      ],
+                      borderWidth: 1
+                    }]
+                  },
+                  options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+              })
+
+            var myChart = new Chart(ctx, {
+              type: 'polarArea',
+              data: {
+                  labels: labels,
+                  datasets: [{
+                      label: '# of Votes',
+                      data: defaultData,
+                      backgroundColor: [
+                          'rgba(255, 99, 132, 0.2)',
+                          'rgba(54, 162, 235, 0.2)',
+                          'rgba(255, 206, 86, 0.2)',
+                          'rgba(75, 192, 192, 0.2)',
+                          'rgba(153, 102, 255, 0.2)',
+                          'rgba(255, 159, 64, 0.2)'
+                      ],
+                      borderColor: [
+                          'rgba(255, 99, 132, 1)',
+                          'rgba(54, 162, 235, 1)',
+                          'rgba(255, 206, 86, 1)',
+                          'rgba(75, 192, 192, 1)',
+                          'rgba(153, 102, 255, 1)',
+                          'rgba(255, 159, 64, 1)'
+                      ],
+                      borderWidth: 1
+                    }]
+                  },
+                  options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+              })
+          }
+        </script>
+        <div class="row">
+          <div class="col-sm-12" url-endpoint="{ % url 'api-data' % }">
+            <canvas id="myChart" width="40" height="40"></canvas>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12" url-endpoint="{ % url 'api-data' % }">
+            <canvas id="myChart2" width="40" height="40"></canvas>
+          </div>
+        </div>
+
+        </div>
+        
+      </div>
+
+      <!-- <div class="data-audiolization-frame">
+        <iframe height="430" width="350" src="https://bot.dialogflow.com/4776cdaf-8673-4036-9a57-716bc801a9ed"></iframe>
+      </div> -->
+    </main>
+
+    {% endblock %}
